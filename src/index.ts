@@ -4,7 +4,7 @@ const components: IRegistry[] = [
     // MyComponent as unknown as IRegistry,
 ];
 
-export const PluginConfiguration = {
+const pluginConfiguration = {
     register(container: IContainer): IContainer {
         return container.register(components)
     },
@@ -12,4 +12,11 @@ export const PluginConfiguration = {
     createContainer(): IContainer {
         return this.register(DI.createContainer());
     }
+};
+
+export const PluginConfiguration = {
+    customize(components: any[] = []) {
+        return { ...pluginConfiguration };
+    },
+    ...pluginConfiguration
 };
