@@ -1,22 +1,23 @@
 import { DI, IContainer, IRegistry } from '@aurelia/kernel';
 
-const components: IRegistry[] = [
+const DefaultComponents: IRegistry[] = [
     // MyComponent as unknown as IRegistry,
 ];
 
-const pluginConfiguration = {
-    register(container: IContainer): IContainer {
-        return container.register(components)
-    },
-
-    createContainer(): IContainer {
-        return this.register(DI.createContainer());
-    }
-};
+function configure(container: IContainer, config?): IContainer {
+    return container.register(...DefaultComponents)
+}
 
 export const PluginConfiguration = {
-    customize(components: any[] = []) {
-        return { ...pluginConfiguration };
+    register(container: IContainer): IContainer {
+        return configure(container);
     },
-    ...pluginConfiguration
+
+    customize(config?) {
+        return {
+            register(container: IContainer): IContainer {
+                return configure(container, config);
+            }
+        }
+    }
 };
