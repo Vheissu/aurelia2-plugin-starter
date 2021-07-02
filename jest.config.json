@@ -32,6 +32,7 @@
         "<rootDir>/test"
     ],
     "testEnvironment": "node",
+    "testRunner": "jest-circus/runner",
     "coveragePathIgnorePatterns": [
         "/node_modules/",
         "package.json",
@@ -46,9 +47,6 @@
     ],
     "setupFiles": [
         "<rootDir>/test/jest.setup.ts"
-    ],
-    "setupFilesAfterEnv": [
-        "<rootDir>/test/jest.timeout.ts"
     ],
     "modulePaths": [
         "<rootDir>/src",
